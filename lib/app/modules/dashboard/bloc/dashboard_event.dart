@@ -20,5 +20,6 @@ class OnLoadVideoEvent extends DashboardEvent {
 
 class OnSpeakEvent extends DashboardEvent {
   final String text;
-  const OnSpeakEvent({required this.text});
+  final bool useEleventLabs;
+  const OnSpeakEvent({required this.text, required this.useEleventLabs});
 }
