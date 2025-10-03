@@ -21,7 +21,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     on<OnLoadVideoEvent>((event, emit) async {
       _controller?.dispose();
-      _controller = VideoPlayerController.file(File("c:\\videos\\${event.filename}"));
+      _controller = VideoPlayerController.file(File("/home/nvidia-jpac2/Videos/${event.filename}"));
       await _controller!.initialize();
       await _controller!.setLooping(true);
       await _controller!.play();
