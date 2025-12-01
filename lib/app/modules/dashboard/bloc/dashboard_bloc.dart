@@ -33,8 +33,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     on<OnSpeakEvent>((event, emit) async {
       emit(state.copyWith(textToSpeak: event.text));
-      await flutterTts.awaitSpeakCompletion(true);
-      await flutterTts.speak(event.text);
+
+  
+        await flutterTts.awaitSpeakCompletion(true);
+        await flutterTts.speak(event.text);
+    
+
       emit(state.copyWith(textToSpeak: ""));
     });
 
@@ -66,7 +70,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Future<void> _onConnectSocket() async {
     socket?.disconnect();
     socket = io.io(
-      "http://localhost:5001",
+      "http://10.13.13.8:5001",
       io.OptionBuilder().setTransports(['websocket']).setExtraHeaders(
           {'Origin': '*'}).build(),
     );
@@ -76,8 +80,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     });
 
     socket!.on("speak", (data) {
-      add(OnSpeakEvent(text: data['text']));
+
+          //TODO: Condicion elevenlab
+
+      add(OnSpeakEvent(text: data['text'], useEleventLabs: false));
     });
+
   }
 
   @override
